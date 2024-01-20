@@ -54,6 +54,12 @@ vim.opt.hlsearch = true
 
 vim.opt.scrolloff = 8
 
+vim.o.km = "startsel"
+
+vim.keymap.set("v", "<C-c>", '"+y')
+vim.keymap.set("v", "<C-x>", '"+d')
+vim.keymap.set("i", "<C-v>", '<esc>"+Pi')
+vim.keymap.set("n", "<C-v>", '"+P')
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
