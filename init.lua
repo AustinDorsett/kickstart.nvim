@@ -61,6 +61,9 @@ vim.keymap.set("v", "<C-x>", '"+d')
 vim.keymap.set("i", "<C-v>", '<esc>"+Pi')
 vim.keymap.set("n", "<C-v>", '"+P')
 
+vim.keymap.set("v", "<up>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<down>", ":m '<-2<CR>gv=gv")
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required ()
