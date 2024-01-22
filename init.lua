@@ -60,9 +60,17 @@ vim.keymap.set("v", "<C-c>", '"+y')
 vim.keymap.set("v", "<C-x>", '"+d')
 vim.keymap.set("i", "<C-v>", '<esc>"+Pi')
 vim.keymap.set("n", "<C-v>", '"+P')
+vim.keymap.set("n", "<C-s>", ":w<CR>")
 
 vim.keymap.set("v", "<up>", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "<down>", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+--vim.keymap.set("x", "<leader>p", '"_dP')
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -292,6 +300,7 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
+  { 'nvim-telescope/telescope-project.nvim' },
 }, {})
 
 -- [[ Setting options ]]
@@ -401,6 +410,15 @@ local function find_git_root()
   end
   return git_root
 end
+
+require'telescope'.load_extension('project')
+
+vim.api.nvim_set_keymap(
+        'n',
+        '<C-p>',
+        ":lua require'telescope'.extensions.project.project{}<CR>",
+        {noremap = true, silent = true}
+)
 
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
