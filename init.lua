@@ -741,5 +741,12 @@ require('undotree').setup{
 
 vim.keymap.set('n', '<leader>u', require('undotree').toggle, { noremap = true, silent = true })
 
+vim.cmd([[
+  augroup defold_script
+    autocmd!
+    autocmd BufRead,BufNewFile *.script,*.gui_script set filetype=lua
+  augroup END
+]])
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
