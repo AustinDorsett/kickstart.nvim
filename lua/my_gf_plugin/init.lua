@@ -100,7 +100,9 @@ end
 function M.override_gf()
     local current_file = vim.fn.expand("<cfile>")
     local new_file = replace_path(current_file)
-    new_file = clean_github_url(current_file, new_file)
+    if current_file ~= new_file then
+        new_file = clean_github_url(current_file, new_file)
+    end
     vim.cmd("edit " .. new_file)
 end
 
