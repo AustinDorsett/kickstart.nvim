@@ -315,7 +315,32 @@ require('lazy').setup({
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
   { 'nvim-telescope/telescope-project.nvim' },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+    init = function()
+      vim.g.mkdp_auto_start = 1
+      vim.g.mkdp_auto_close = 1
+      vim.g.mkdp_filetypes = {'markdown', 'md', 'mkd', 'mdx'}
+      vim.g.mkdp_browserfunc = "OpenMarkdownPreviewBrowser"
+    end,
+},
 }, {})
+
+vim.cmd [[
+  function! OpenMarkdownPreviewBrowser(url)
+  " Check if the operating system is macOS
+    if has("macunix")
+    echo "Opening the URL with Safari."
+    " Open the URL with Safari in the background
+      silent execute "!open -g -a Safari " . a:url
+    else
+      echo "This function only works on macOS."
+    endif
+  endfunction
+]]
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

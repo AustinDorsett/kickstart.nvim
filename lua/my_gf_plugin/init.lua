@@ -76,11 +76,21 @@ local function update_replacements()
     end
 end
 
--- Function to replace part of the path
+local function escape_lua_pattern(s)
+    local matches = { "%", ".", "+", "-", "*", "?", "[", "^", "$", "(", ")", "{", "}", "|" }
+    for i = 1, #matches do
+        local match = matches[i]
+        s = s:gsub("%" .. match, "%%" .. match)
+    end
+    return s
+end
+
 local function replace_path(path)
     for pattern, replacement in pairs(replacements) do
-        if string.find(path, pattern) then
-            return string.gsub(path, pattern, replacement)
+        local escaped_pattern = escape_lua_pattern(pattern)
+        if string.find(path, escaped_pattern) then
+            print("Replacing " .. pattern .. " with " .. replacement)
+            return string.gsub(path, escaped_pattern, replacement)
         end
     end
     return path
@@ -89,11 +99,8 @@ end
 -- Override the 'gf' behavior
 function M.override_gf()
     local current_file = vim.fn.expand("<cfile>")
-    --print("Current file: " .. current_file)
     local new_file = replace_path(current_file)
-    --print("before clean: " .. new_file)
     new_file = clean_github_url(current_file, new_file)
-    --print("New file: " .. new_file)
     vim.cmd("edit " .. new_file)
 end
 
