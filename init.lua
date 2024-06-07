@@ -62,8 +62,8 @@ vim.keymap.set("i", "<C-v>", '<esc>"+Pi')
 vim.keymap.set("n", "<C-v>", '"+P')
 vim.keymap.set("n", "<C-s>", ":w<CR>")
 
-vim.keymap.set("v", "<up>", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "<down>", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "k", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "j", ":m '<-2<CR>gv=gv")
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
