@@ -326,7 +326,13 @@ require('lazy').setup({
       vim.g.mkdp_filetypes = {'markdown', 'md', 'mkd', 'mdx'}
       vim.g.mkdp_browserfunc = "OpenMarkdownPreviewBrowser"
     end,
-},
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  }
 }, {})
 
 vim.cmd [[
